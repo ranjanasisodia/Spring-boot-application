@@ -1,23 +1,38 @@
-After the huge response and viewership for my earlier article https://dzone.com/articles/spring-boot-restful-web-service-example I have decided to write a new article with all the REST calls example respectively GET, POST, PUT and DELETE. 
+NewsPaper Scraper Service
 
-Prerequisites for this project:
-
-1. If you have Eclipse, download the STS plug-in from here https://marketplace.eclipse.org/content/spring-tools-aka-spring-ide-and-spring-tool-suite
-
-2. If you don’t have Eclipse, download STS from here https://spring.io/guides/gs/sts/
-
-3. Download the latest JDK from here http://www.oracle.com/technetwork/java/javase/downloads/index.html
-
-4. Also for testing please download and install SOAPUI tool from here https://www.soapui.org/downloads/soapui.html
-
-The first example I am going to explain is about HTTP GET request, second example will be about HTTP POST request, third example about HTTP PUT request and fourth example is for HTTP DELETE request. In these entire examples I am going to use JSON Representation.
-
-Before checkout this project create a folder under C drive like C:\Projects
+API calls:
+1. http://localhost:8083/author/allauthors
+   This api gets the list of all authors on thehindu page.
+   
+2. http://Host:8083/author/get?name=nameOfAuthor
+   Example: http://localhost:8083//author/get?name=Aseem%20Chhabra
+   This api gets html data of the given author, which can be scrapped futher to get articles.
+   
+   
  
-Now open command prompt
-
-1. cd c:\Projects
-2. check out the mail branch
+To run the Project
+===================
+1. go to the directory to clone the project
+2. check out the master branch
 3. cd spring-boot-rest-2
 4. Execute - mvnw clean package
 5. start the server - java -jar target\spring-boot-rest-2-0.0.1-SNAPSHOT.jar
+6. Fire the api's in browser.
+
+
+Project Architecture:
+1. pom.xml contains spring boot dependencies and an addition Jsoup dependency.
+   JSoup is used for html parsing/scrapping.
+   
+2. Beans
+   Author.java - This stores name of author and link to his/her articles
+   Articles.java - This should store title and url of article, url can further be clicked to get full article.
+   
+3. Utility class:
+   ParseAuthors.java - collectAuthorData() method collects name and link of author by parsing the html of link https://www.thehindu.com/profile/.
+   getData()- It gets html data for given author. Parsing of html is yet to be done.
+   
+4. Controller:
+   This is communicating end which contains rest end points. Both api calls are given in the start os document.
+   
+   
